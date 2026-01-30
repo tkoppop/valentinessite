@@ -8,11 +8,9 @@ if (yesBtn) {
 }
 
 if (noBtn) {
-  // Move the button somewhere else on the screen
   const dodge = () => {
     const padding = 18;
 
-    // Ensure the button has measurable size
     const rect = noBtn.getBoundingClientRect();
     const btnW = rect.width || 140;
     const btnH = rect.height || 48;
@@ -28,26 +26,21 @@ if (noBtn) {
     noBtn.style.top = `${y}px`;
   };
 
-  // Start somewhere fun so it doesn't overlap the Yes button forever
   dodge();
 
-  // Desktop: dodge on hover / approach
   noBtn.addEventListener("mouseenter", dodge);
   noBtn.addEventListener("mousemove", dodge);
 
-  // Mobile: dodge on touch
   noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault(); // stops the "click" from firing on mobile
+    e.preventDefault(); 
     dodge();
   }, { passive: false });
 
-  // If a click event somehow triggers anyway, block it and dodge again
   noBtn.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
     dodge();
   });
 
-  // If the window resizes, keep it in bounds
   window.addEventListener("resize", dodge);
 }
